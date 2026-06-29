@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
   workflow_call:  # from release.yml
+  workflow_dispatch: 
 
 permissions:
   contents: read
