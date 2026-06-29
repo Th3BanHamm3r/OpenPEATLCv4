@@ -54,7 +54,7 @@ jobs:
 
       - name: Run OpenPLC Tests
         run: |
-          pdm run pytest --basetemp=./pytest_files -v ./tests/modules/test_openplcv4.py
+          pdm run pytest --basetemp=./pytest_files -v ./tests/modules/openplc/test_openplcv4.py
 
       - name: Upload Test Results
         if: always()
