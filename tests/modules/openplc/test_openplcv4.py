@@ -10,22 +10,21 @@ from peat.modules.openplc.openplcv4 import OpenPLCv4
 """Creates a DeviceData object configured to point to the live Docker container."""
 @pytest.fixture
 def live_dev(tmp_path):
-    dev = DeviceData(
-        ip="127.0.0.1",
-        options={
-            "openplcv4": {
-                "username": "admin", 
-                "password": "admin",
-                "pull_methods": ["https"],
-                "clean_upload": True,
-                "plugins_to_query": {}
-            },
-            "https": {"port": 8443, "ssl": True}
+    """Creates a DeviceData object configured to point to the live Docker container."""
+    dev = DeviceData(ip="127.0.0.1")
+    dev.__dict__["options"] = {
+        "openplcv4": {
+            "username": "admin", 
+            "password": "admin",
+            "pull_methods": ["https"],
+            "clean_upload": True,
+            "plugins_to_query": {}
         },
-        extra={},
-        successful_pulls={}
-    )
-    dev._out_dir = tmp_path / "devices" / "127.0.0.1"
+        "https": {"port": 8443, "ssl": True}
+    }
+    dev.__dict__["extra"] = {}
+    dev.__dict__["successful_pulls"] = {}
+    dev.__dict__["_out_dir"] = tmp_path / "devices" / "127.0.0.1"
     dev._out_dir.mkdir(parents=True, exist_ok=True)
     return dev
 
